@@ -9,28 +9,42 @@ import java.io.*;
 import java.util.*;
 
 public class Launcher {
-	
-	private String inputFileText= "";
-	
+
+	private String inputFileText;
+
 	public Launcher(String inputFilename)
 	{
 		try{
 			Scanner inputReader= new Scanner(new File(inputFilename));
-			
-			while (inputReader.hasNext())
+
+			//variable to fix a problem where null was being inserted due to += logic
+			boolean firstRun= true;
+
+			//while there is input to eat
+			while (inputReader.hasNextLine())
 			{
-				inputFileText= inputFileText + inputReader.next();
+				//if it's the first run, we need to not string concatenate
+				if (firstRun == true)
+				{
+					inputFileText= inputReader.nextLine() + "\n";
+					firstRun= false;
+				}
+				//otherwise we need to concatenate
+				else
+					inputFileText= inputFileText + inputReader.nextLine() + "\n";
 			}
-			
+
+			//close the input scanner
 			inputReader.close();
 		}
+		//catch error in scripting call
 		catch (IOException e)
 		{
 			System.out.println("File not found. Please relaunch.");
 			System.exit(1);
 		}
 	}
-	
+
 	//getter for the big string
 	public String getText()
 	{
@@ -51,44 +65,44 @@ public class Launcher {
 		{
 			//create a new Launcher object, reading in the filename
 			Launcher encoderScanner= new Launcher(args[1]);
-			
+
 			//pass the string from the read in to the encoder
 			Encoder encoder= new Encoder(encoderScanner.getText());
-			
+
 			//print outputs
 			System.out.println("Compression ratio: "+
 					encoder.getCompressionRatio());
-			
+
 			//print out the filename where the compressed file is stored.
 			System.out.println("The compressed file can be found at:\n"+
-			encoder.getCompressedFilename());
+					encoder.getCompressedFilename());
 		}
-		
+
 		//perform a decode
 		else if (args[0].compareTo("decode") == 0)
 		{
 			//create a new Launcher object, reading in the filename
 			Launcher decoderScanner= new Launcher(args[1]);
-			
+
 			//pass the string from the read in to the decoder
 			Decoder decoder= new Decoder(decoderScanner.getText());
-			
+
 			//print outputs
 			System.out.print("Decompression ratio: "+
 					decoder.getDecompressionRatio());
-			
+
 			//print out the filename where the decompressed file is stored.
 			System.out.println("The decompressed file can be found at:\n"+
-			decoder.getDecompressedFilename());
+					decoder.getDecompressedFilename());
 		}
-		
+
 		//if there is an error in the scripting file
 		else
 		{
 			System.out.println("Invalid argument to function call.\n" +
 					"Please edit your argument.");
 			System.exit(1);
-			
+
 		}
 	}
 
