@@ -50,7 +50,19 @@ public class Scanner {
 		//perform a decode
 		if (args[0].compareTo("decode") == 0)
 		{
+			//create a new Scanner object, reading in the filename
 			Scanner decoderScanner= new Scanner(args[1]);
+			
+			//pass the string from the read in to the decoder
+			Decoder decoder= new Decoder(decoderScanner.getText());
+			
+			//print outputs
+			System.out.print("Decompression ratio: "+
+					decoder.getDecompressionRatio());
+			
+			//print out the filename where the decompressed file is stored.
+			System.out.println("The decompressed file can be found at:\n"+
+			decoder.getDecompressedFilename());
 		}
 		
 		//if there is an error in the scripting file
