@@ -5,16 +5,17 @@
 //21 November 2012
 //Launcher and Helper Object
 
+import java.io.*;
 import java.util.*;
 
 public class Launcher {
 	
-	private String inputFileText;
+	private String inputFileText= "";
 	
 	public Launcher(String inputFilename)
 	{
 		try{
-			Scanner inputReader= new Scanner(inputFilename);
+			Scanner inputReader= new Scanner(new File(inputFilename));
 			
 			while (inputReader.hasNext())
 			{
@@ -23,7 +24,7 @@ public class Launcher {
 			
 			inputReader.close();
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			System.out.println("File not found. Please relaunch.");
 			System.exit(1);
