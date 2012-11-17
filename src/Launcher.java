@@ -3,15 +3,16 @@
 //COP 3503 Assignment 4
 //Huffman Encoding and Decoding
 //21 November 2012
-//Scanner and Helper Object
+//Launcher and Helper Object
 
-public class Scanner {
+import java.util.*;
+
+public class Launcher {
 	
 	private String inputFileText;
 	
-	public Scanner(String inputFilename)
+	public Launcher(String inputFilename)
 	{
-		
 	}
 	
 	//getter for the big string
@@ -21,7 +22,7 @@ public class Scanner {
 	}
 
 	/**
-	 * The main function for @Scanner.
+	 * The main function for @Launcher.
 	 * 
 	 * Functions as a helper function to launch the rest of the program. 
 	 * 
@@ -32,8 +33,8 @@ public class Scanner {
 		//perform an encode
 		if (args[0].compareTo("encode") == 0)
 		{
-			//create a new Scanner object, reading in the filename
-			Scanner encoderScanner= new Scanner(args[1]);
+			//create a new Launcher object, reading in the filename
+			Launcher encoderScanner= new Launcher(args[1]);
 			
 			//pass the string from the read in to the encoder
 			Encoder encoder= new Encoder(encoderScanner.getText());
@@ -50,8 +51,8 @@ public class Scanner {
 		//perform a decode
 		if (args[0].compareTo("decode") == 0)
 		{
-			//create a new Scanner object, reading in the filename
-			Scanner decoderScanner= new Scanner(args[1]);
+			//create a new Launcher object, reading in the filename
+			Launcher decoderScanner= new Launcher(args[1]);
 			
 			//pass the string from the read in to the decoder
 			Decoder decoder= new Decoder(decoderScanner.getText());
