@@ -1,3 +1,9 @@
+//Brandon Forster, Robert Millward,
+//William Corlett and Phillip Rajala
+//COP 3503 Assignment 4
+//Huffman Encoding and Decoding
+//21 November 2012
+//Decoding via Huffman Algorithm
 
 public class Decoder {
 
