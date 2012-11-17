@@ -13,6 +13,21 @@ public class Launcher {
 	
 	public Launcher(String inputFilename)
 	{
+		try{
+			Scanner inputReader= new Scanner(inputFilename);
+			
+			while (inputReader.hasNext())
+			{
+				inputFileText= inputFileText + inputReader.next();
+			}
+			
+			inputReader.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("File not found. Please relaunch.");
+			System.exit(1);
+		}
 	}
 	
 	//getter for the big string
@@ -40,7 +55,7 @@ public class Launcher {
 			Encoder encoder= new Encoder(encoderScanner.getText());
 			
 			//print outputs
-			System.out.print("Compression ratio: "+
+			System.out.println("Compression ratio: "+
 					encoder.getCompressionRatio());
 			
 			//print out the filename where the compressed file is stored.
@@ -49,7 +64,7 @@ public class Launcher {
 		}
 		
 		//perform a decode
-		if (args[0].compareTo("decode") == 0)
+		else if (args[0].compareTo("decode") == 0)
 		{
 			//create a new Launcher object, reading in the filename
 			Launcher decoderScanner= new Launcher(args[1]);
