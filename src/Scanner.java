@@ -13,6 +13,12 @@ public class Scanner {
 	{
 		
 	}
+	
+	//getter for the big string
+	public String getText()
+	{
+		return this.inputFileText;
+	}
 
 	/**
 	 * The main function for @Scanner.
@@ -26,13 +32,25 @@ public class Scanner {
 		//perform an encode
 		if (args[0].compareTo("encode") == 0)
 		{
-			new Scanner(args[1]);
+			//create a new Scanner object, reading in the filename
+			Scanner encoderScanner= new Scanner(args[1]);
+			
+			//pass the string from the read in to the encoder
+			Encoder encoder= new Encoder(encoderScanner.getText());
+			
+			//print outputs
+			System.out.print("Compression ratio: "+
+					encoder.getCompressionRatio());
+			
+			//print out the filename where the compressed file is stored.
+			System.out.println("The compressed file can be found at:\n"+
+			encoder.getCompressedFilename());
 		}
 		
 		//perform a decode
 		if (args[0].compareTo("decode") == 0)
 		{
-			new Scanner(args[1]);
+			Scanner decoderScanner= new Scanner(args[1]);
 		}
 		
 		//if there is an error in the scripting file
