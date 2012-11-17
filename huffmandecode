@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Brandon Forster, Robert Millward,
+# William Corlett and Phillip Rajala
+# COP 3503 Assignment 4
+# Huffman Encoding and Decoding
+# 21 November 2012
+# The scripting file that compiles and runs the decoding command.
+
+javac Launcher.java Decoder.java
+java Launcher decode "$1"
+
+# $1 in a shell script denotes the command line argument
+# The quotes around this tell the shell to preserve whitespace
+# (spaces and tabs and newlines) when passing the argument to the
+# 'java Launcher' command. The 'decode' argument is hardcoded.
