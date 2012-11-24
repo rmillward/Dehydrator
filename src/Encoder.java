@@ -6,6 +6,9 @@
 //Encoding via Huffman Algorithm
 
 public class Encoder {
+	
+	//size of full ascii table
+    private static final int ASCII_ALPHABET_SIZE = 256;
 
 	/**
 	 * Should output encoded file to a different text file
@@ -13,7 +16,6 @@ public class Encoder {
 	 * @param text text to be encoded as an argument
 	 */
 	public Encoder(String text) {
-		// TODO Auto-generated constructor stub
 	}
 
 	//return the compression ratio of the original file:compressed file
