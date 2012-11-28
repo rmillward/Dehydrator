@@ -6,20 +6,20 @@
 //Node Object
 
 public class Node implements Comparable<Node> {
-	
+
 	private char 	token;
 	private int 	frequency;
 	private Node 	left;
 	private Node 	right;
-	
-	Node(char ch, int freq, Node left, Node right) {
-        this.setToken(token);
-        this.setFrequency(frequency);
-        this.setLeft(left);
-        this.setRight(right);
-    }
 
-    public char getToken() {
+	Node(char ch, int freq, Node left, Node right) {
+		this.setToken(token);
+		this.setFrequency(frequency);
+		this.setLeft(left);
+		this.setRight(right);
+	}
+
+	public char getToken() {
 		return token;
 	}
 
@@ -52,16 +52,16 @@ public class Node implements Comparable<Node> {
 	}
 
 	// is the node a leaf node?
-    public boolean isLeaf() {
-        return (getLeft() == null && getRight() == null);
-    }
+	public boolean isLeaf() {
+		return (getLeft() == null && getRight() == null);
+	}
 
 	/**
 	 * returns a positive value when this node has a larger value than arg,
 	 * negative when this node's frequency is smaller
 	 */
 	public int compareTo(Node other) {
-		
+
 		return (other.getFrequency() - this.getFrequency());
 	}
 

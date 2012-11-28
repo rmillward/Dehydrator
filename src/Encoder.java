@@ -57,11 +57,17 @@ public class Encoder {
 		Node root = pq.remove();
 
 		// our lookup table for which int equates to which series of 0s and 1s
-		String[] hash = new String[128];
+		String[] hash = new String[ASCII_ALPHABET_SIZE];
 
 		// fill the lookup table
 		fillHash(hash, root, "");
+		
+		//print a representation of tree
+		printTree(root, hash);
 
+		//print a delimiter so we know where tree ends
+		System.out.println("/nEND_OF_TREE/n");
+		
 		// write the encoded file using the lookup table
 		for (int i = 0; i < text.length(); i++) {
 			System.out.println(hash[(int)text.charAt(i)]);
@@ -71,12 +77,25 @@ public class Encoder {
 	// recursive function that fills the hash table of what bits equate to which chars
 	public void fillHash(String[] hashArray, Node current, String code) {
 		if (!current.isLeaf()) { // recursive traversal
-			fillHash(hashArray, current.getRight(), code + '1');
 			fillHash(hashArray, current.getLeft(),  code + '0');
+			fillHash(hashArray, current.getRight(), code + '1');
 		}
 		else { // if we're at a leaf, set the array value
-			hashArray[current.getToken()] = code; 
-			// System.out.println((char)current.id + " " + current.id + " " + code); // debug for output errors
+			hashArray[current.getToken()] = code;
+		}
+	}
+
+	//prints the node and all its children using postorder recursion
+	public void printTree(Node current, String[] hash)
+	{
+		if (current == null)
+			return;
+		else
+		{
+			printTree(current.getLeft(), hash);
+			printTree(current.getRight(), hash);
+			System.out.println(hash[(int)current.getToken()] + " "
+					+current.getToken()+ " " + current.getFrequency());
 		}
 	}
 

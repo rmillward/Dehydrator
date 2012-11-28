@@ -1,3 +1,5 @@
+import java.util.*;
+
 //Brandon Forster, Robert Millward,
 //William Corlett and Phillip Rajala
 //COP 3503 Assignment 4
@@ -6,6 +8,8 @@
 //Decoding via Huffman Algorithm
 
 public class Decoder {
+	
+	public static final String DELIMITER = "END_OF_TREE";
 
 	/**
 	 * Should output decoded file to a different text file
@@ -14,6 +18,41 @@ public class Decoder {
 	 */
 	public Decoder(String text) {
 
+		/*
+		 * //prints the node and all its children using postorder recursion
+	public void printTree(Node current, String[] hash)
+	{
+		if (current == null)
+			return;
+		else
+		{
+			printTree(current.getLeft(), hash);
+			printTree(current.getRight(), hash);
+			System.out.println(hash[(int)current.getToken()]);
+		}
+	}
+		 */
+		
+		Scanner treeScanner = new Scanner(text);
+		PriorityQueue<Node> treeQueue = new PriorityQueue<Node>();
+		Stack<Node> treeStack = new Stack<Node>();
+		
+		//run until we hit the hard coded delimiter
+		while (treeScanner.next().compareTo(DELIMITER) != 0)
+		{
+			//do a dfs looking for left branches
+			while (treeScanner.nextInt() == 0)
+			{
+				Node lefty= new Node((char)treeScanner.nextInt(), treeScanner.nextInt(), null, null);
+				//if this node has a parent, assign this new node as its left child
+				if (!treeStack.isEmpty())
+					treeStack.peek().setLeft(lefty);
+				treeStack.add(lefty);
+				treeQueue.add(lefty);
+			}
+			
+		}
+		
 		Node temp = root; // temp copy of our tree for the same file encoded above
 
 		for (int i = 0; i < text.length(); i++) {
