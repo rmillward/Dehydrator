@@ -85,17 +85,17 @@ public class Encoder {
 		}
 	}
 
-	//prints the node and all its children using postorder recursion
+	//prints the node and all its children using preorder recursion
 	public void printTree(Node current, String[] hash)
 	{
 		if (current == null)
 			return;
 		else
 		{
-			printTree(current.getLeft(), hash);
-			printTree(current.getRight(), hash);
 			System.out.println(hash[(int)current.getToken()] + " "
 					+current.getToken()+ " " + current.getFrequency());
+			printTree(current.getLeft(), hash);
+			printTree(current.getRight(), hash);
 		}
 	}
 

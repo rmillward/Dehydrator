@@ -10,56 +10,26 @@ import java.util.*;
 public class Decoder {
 	
 	public static final String DELIMITER = "END_OF_TREE";
+	
+	//save the this.getText() as a value so it can be accessed
+	private String text;
 
 	/**
-	 * Should output decoded file to a different text file
+	 * Should output decoded file to a different this.getText() file
 	 * 
-	 * @param text text to be decoded as an argument
+	 * @param this.getText() this.getText() to be decoded as an argument
 	 */
 	public Decoder(String text) {
 
-		/*
-		 * //prints the node and all its children using postorder recursion
-	public void printTree(Node current, String[] hash)
-	{
-		if (current == null)
-			return;
-		else
-		{
-			printTree(current.getLeft(), hash);
-			printTree(current.getRight(), hash);
-			System.out.println(hash[(int)current.getToken()]);
-		}
-	}
-		 */
-		
-		Scanner treeScanner = new Scanner(text);
-		PriorityQueue<Node> treeQueue = new PriorityQueue<Node>();
-		Stack<Node> treeStack = new Stack<Node>();
-		
-		//run until we hit the hard coded delimiter
-		while (treeScanner.next().compareTo(DELIMITER) != 0)
-		{
-			//do a dfs looking for left branches
-			while (treeScanner.nextInt() == 0)
-			{
-				Node lefty= new Node((char)treeScanner.nextInt(), treeScanner.nextInt(), null, null);
-				//if this node has a parent, assign this new node as its left child
-				if (!treeStack.isEmpty())
-					treeStack.peek().setLeft(lefty);
-				treeStack.add(lefty);
-				treeQueue.add(lefty);
-			}
-			
-		}
+		this.text= text;
 		
 		Node temp = root; // temp copy of our tree for the same file encoded above
 
-		for (int i = 0; i < text.length(); i++) {
-			if(text.charAt(i) == '0'){ //when reading the file, if we get a 0, traverse the tree left
+		for (int i = 0; i < this.getText().length(); i++) {
+			if(this.getText().charAt(i) == '0'){ //when reading the file, if we get a 0, traverse the tree left
 				temp = temp.getLeft();
 			}
-			else if(text.charAt(i) == '1')// if we get a 1, traverse the tree right
+			else if(this.getText().charAt(i) == '1')// if we get a 1, traverse the tree right
 			{
 				temp = temp.getRight();
 			}
@@ -76,17 +46,20 @@ public class Decoder {
 			}
 		}
 	}
-
-	//return the compression ratio of the compressed file:decompressed file
-	public String getDecompressionRatio() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Node getTree(Node root)
+	{
+		if (root.isLeaf())
+			return root;
+		else
+		{
+			return new Node(this.get, 0, root, root)
+		}
 	}
 
-	//return the filename of the decompressed file that the Decoder outputs
-	public String getDecompressedFilename() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getText()
+	{
+		return this.text;
 	}
 
 }
