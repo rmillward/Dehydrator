@@ -71,14 +71,6 @@ public class Launcher {
 
 			//pass the string from the read in to the encoder
 			Encoder encoder= new Encoder(encoderScanner.getText());
-
-			//print outputs
-			System.out.println("Compression ratio: "+
-					encoder.getCompressionRatio());
-
-			//print out the filename where the compressed file is stored.
-			System.out.println("The compressed file can be found at:\n"+
-					encoder.getCompressedFilename());
 		}
 
 		//perform a decode
@@ -89,14 +81,6 @@ public class Launcher {
 
 			//pass the string from the read in to the decoder
 			Decoder decoder= new Decoder(decoderScanner.getText());
-
-			//print outputs
-			System.out.print("Decompression ratio: "+
-					decoder.getDecompressionRatio());
-
-			//print out the filename where the decompressed file is stored.
-			System.out.println("The decompressed file can be found at:\n"+
-					decoder.getDecompressedFilename());
 		}
 
 		//if there is an error in the scripting file

@@ -8,9 +8,9 @@ import java.util.*;
 //Decoding via Huffman Algorithm
 
 public class Decoder {
-	
+
 	public static final String DELIMITER = "END_OF_TREE";
-	
+
 	//save the this.getText() as a value so it can be accessed
 	private String text;
 
@@ -22,7 +22,9 @@ public class Decoder {
 	public Decoder(String text) {
 
 		this.text= text;
-		
+
+		Node root = getTree();
+
 		Node temp = root; // temp copy of our tree for the same file encoded above
 
 		for (int i = 0; i < this.getText().length(); i++) {
@@ -46,51 +48,51 @@ public class Decoder {
 			}
 		}
 	}
-	
-	public Node getTree(Node root, String text)
+
+	public Node getTree(Node root)
 	{
 		// parse out our tree from the giant String
-		String textWeWant = text.substring(0, text.indexOf(DELIMITER));
+		String textWeWant = this.getText().substring(0, this.getText().indexOf(DELIMITER));
 		String[] tokens = textWeWant.split(" ");
-		
+
 		// fill out our tree
-		String path = 0;
+		String path = "0";
 		int id, freq = 0;
 		Node current, next;
 		current = root;
-		
+
 		for (int i=0; i < tokens.length; i+=3){
 			// parsing relevant info
 			path = tokens[i];
-			id = tokens[i+1];
-			freq = tokens[i+2];
-			
+			id = Integer.parseInt(tokens[i+1]);
+			freq = Integer.parseInt(tokens[i+2]);
+
 			// follwing the path
-			for (j=0; j < path.length-1; j++){
-				if (path.charat(j) == 0){
-					next = current.left;
+			for (int j=0; j < path.length()-1; j++){
+				if (path.charAt(j) == 0){
+					next = current.getLeft();
 					if (next == null){ // if a child doesn't exist, create an empty one
 						next = new Node((char)-1, -1, null, null);
-						current.left = next; // assign the newborn child
+						current.setLeft(next); // assign the newborn child
 					}
 				}
-				else if (path.charat(j) == 1){
-					next = current.right;
+				else if (path.charAt(j) == 1){
+					next = current.getRight();
 					if (next == null){
 						next = new Node((char)-1, -1, null, null);
-						current.right = next;
+						current.setRight(next);
 					}
 				}
 				current = next;
 				next = null;
 			}
-			
+
 			// setting variables at the end of that path
-			current.id = id;
-			current.freq = freq;
+			current.setToken((char) id);
+			current.setFrequency(freq);
 			current = root;
 		}
-		
+
 		return root;
 	}
 
