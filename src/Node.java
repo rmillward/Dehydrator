@@ -13,15 +13,47 @@ public class Node implements Comparable<Node> {
 	private Node 	right;
 	
 	Node(char ch, int freq, Node left, Node right) {
-        this.token    	= token;
-        this.frequency  = frequency;
-        this.left  		= left;
-        this.right 		= right;
+        this.setToken(token);
+        this.setFrequency(frequency);
+        this.setLeft(left);
+        this.setRight(right);
     }
 
-    // is the node a leaf node?
-    private boolean isLeaf() {
-        return (left == null && right == null);
+    public char getToken() {
+		return token;
+	}
+
+	public void setToken(char token) {
+		this.token = token;
+	}
+
+	public int getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(int frequency) {
+		this.frequency = frequency;
+	}
+
+	public Node getLeft() {
+		return left;
+	}
+
+	public void setLeft(Node left) {
+		this.left = left;
+	}
+
+	public Node getRight() {
+		return right;
+	}
+
+	public void setRight(Node right) {
+		this.right = right;
+	}
+
+	// is the node a leaf node?
+    public boolean isLeaf() {
+        return (getLeft() == null && getRight() == null);
     }
 
 	/**
@@ -30,7 +62,7 @@ public class Node implements Comparable<Node> {
 	 */
 	public int compareTo(Node other) {
 		
-		return (other.frequency - this.frequency);
+		return (other.getFrequency() - this.getFrequency());
 	}
 
 }

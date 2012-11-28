@@ -33,6 +33,9 @@ public class Launcher {
 				else
 					inputFileText= inputFileText + inputReader.nextLine() + "\n";
 			}
+			
+			//remove extra newline at end of file
+			inputFileText = inputFileText.substring(0, inputFileText.length() - 1);
 
 			//close the input scanner
 			inputReader.close();
