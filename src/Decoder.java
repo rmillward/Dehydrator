@@ -49,7 +49,7 @@ public class Decoder {
 		}
 	}
 
-	public Node getTree(Node root)
+	public Node getTree()
 	{
 		// parse out our tree from the giant String
 		String textWeWant = this.getText().substring(0, this.getText().indexOf(DELIMITER));
@@ -58,7 +58,7 @@ public class Decoder {
 		// fill out our tree
 		String path = "0";
 		int id, freq = 0;
-		Node current, next;
+		Node root = null, current, next = null;
 		current = root;
 
 		for (int i=0; i < tokens.length; i+=3){
