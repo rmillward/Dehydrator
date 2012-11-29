@@ -40,7 +40,7 @@ public class Encoder {
 			{
 				//cast the incrementor to the char so the node is well formed
 				//add the freqency to the node object
-				pq.add(new Node((char)i, frequencyTable[i], null, null));
+				pq.add(new Node(i, frequencyTable[i], null, null));
 			}
 		}
 
@@ -48,8 +48,7 @@ public class Encoder {
 		while (pq.size() > 1) {
 			Node left  = pq.remove();
 			Node right = pq.remove();
-			//TODO why is this -1
-			Node parent = new Node((char)-1, left.getFrequency() + right.getFrequency(), left, right);
+			Node parent = new Node(-1, left.getFrequency() + right.getFrequency(), left, right);
 			pq.add(parent);
 		}
 
@@ -62,8 +61,8 @@ public class Encoder {
 		// fill the lookup table
 		fillHash(hash, root, "");
 		
-		//print a representation of tree
-		printTree(root, hash);
+//		//print a representation of tree
+//		printTree(root, hash);
 
 		//print a delimiter so we know where tree ends
 		System.out.println("/nEND_OF_TREE/n");
@@ -77,26 +76,27 @@ public class Encoder {
 	// recursive function that fills the hash table of what bits equate to which chars
 	public void fillHash(String[] hashArray, Node current, String code) {
 		if (!current.isLeaf()) { // recursive traversal
-			fillHash(hashArray, current.getLeft(),  code + '0');
 			fillHash(hashArray, current.getRight(), code + '1');
+			fillHash(hashArray, current.getLeft(),  code + '0');
 		}
 		else { // if we're at a leaf, set the array value
 			hashArray[current.getToken()] = code;
+			System.out.println(code + " " + current.getToken() + " " + current.getFrequency());
 		}
 	}
 
-	//prints the node and all its children using preorder recursion
-	public void printTree(Node current, String[] hash)
-	{
-		if (current == null)
-			return;
-		else
-		{
-			System.out.println(hash[(int)current.getToken()] + " "
-					+current.getToken()+ " " + current.getFrequency());
-			printTree(current.getLeft(), hash);
-			printTree(current.getRight(), hash);
-		}
-	}
+//	//prints the node and all its children using preorder recursion
+//	public void printTree(Node current, String[] hash)
+//	{
+//		if (current == null)
+//			return;
+//		else
+//		{
+//			System.out.println(hash[(int)current.getToken()] + " "
+//					+current.getToken()+ " " + current.getFrequency());
+//			printTree(current.getLeft(), hash);
+//			printTree(current.getRight(), hash);
+//		}
+//	}
 
 }
