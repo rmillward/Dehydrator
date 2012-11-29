@@ -65,7 +65,7 @@ public class Encoder {
 //		printTree(root, hash);
 
 		//print a delimiter so we know where tree ends
-		System.out.println("/nEND_OF_TREE/n");
+		System.out.println("\nEND_OF_TREE\n");
 		
 		// write the encoded file using the lookup table
 		for (int i = 0; i < text.length(); i++) {

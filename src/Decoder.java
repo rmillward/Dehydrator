@@ -52,8 +52,12 @@ public class Decoder {
 	public Node getTree()
 	{
 		// parse out our tree from the giant String
-		String textWeWant = this.getText().substring(0, this.getText().indexOf(DELIMITER));
-		String[] tokens = textWeWant.split(" ");
+		String textWeWant = this.getText().substring(0, this.getText().indexOf(DELIMITER) - 1);
+		//String[] tokens = textWeWant.split(" ");
+		
+		Scanner treeScanner = new Scanner(textWeWant);
+		
+		
 
 		// fill out our tree
 		String path = "0";
@@ -61,11 +65,14 @@ public class Decoder {
 		Node root = null, current, next = null;
 		current = root;
 
-		for (int i=0; i < tokens.length; i+=3){
+		for (int i=0; i < treeScanner.; i+=3){
 			// parsing relevant info
-			path = tokens[i];
-			id = Integer.parseInt(tokens[i+1]);
-			freq = Integer.parseInt(tokens[i+2]);
+			path = treeScanner.nextInt();
+			id = treeScanner.nextInt();
+			freq = treeScanner.nextInt();
+//			path = tokens[i];
+//			id = Integer.parseInt(tokens[i+1]);
+//			freq = Integer.parseInt(tokens[i+2]);
 
 			// follwing the path
 			for (int j=0; j < path.length()-1; j++){
